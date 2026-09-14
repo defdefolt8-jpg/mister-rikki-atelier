@@ -5,3 +5,7 @@ const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isInte
 
 // Revision 3: restrained dimensional motion, only for precise pointers.
 if(matchMedia('(hover: hover) and (prefers-reduced-motion: no-preference)').matches){document.querySelectorAll('.visit-card,.seal').forEach(el=>{el.addEventListener('pointermove',e=>{const r=el.getBoundingClientRect();el.style.rotate=`${(e.clientX-r.left-r.width/2)/r.width*3}deg`;el.style.translate=`0 ${(e.clientY-r.top-r.height/2)/r.height*-5}px`});el.addEventListener('pointerleave',()=>{el.style.rotate='0deg';el.style.translate='0 0'})});}
+
+// Two identical lanes make the marquee loop without a gap at any viewport width.
+const tickerTrack=document.querySelector('.ticker>div');
+if(tickerTrack){const lane=tickerTrack.innerHTML;tickerTrack.className='ticker-track';tickerTrack.innerHTML=`<div class="ticker-group">${lane}</div><div class="ticker-group">${lane}</div>`;}
